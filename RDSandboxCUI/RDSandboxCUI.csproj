@@ -39,9 +39,11 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="ArcHttpPrac.cs" />
+        <Compile Include="Extension.cs" />
         <Compile Include="HttpPrac.cs" />
-        <Compile Include="HttpRequestObjectReceive.cs" />
-        <Compile Include="HttpRequestObjectServe.cs" />
+        <Compile Include="HttpRequestObject.cs" />
+        <Compile Include="HttpResponseCode.cs" />
+        <Compile Include="HttpResponseObject.cs" />
         <Compile Include="NextServer.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

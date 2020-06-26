@@ -8,5 +8,6 @@ namespace RDSandboxCUI
         Post,
         Head,
         Options,
+        Delete,
     }
 }

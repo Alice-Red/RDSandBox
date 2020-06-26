@@ -8,25 +8,24 @@ using System.Text.RegularExpressions;
 
 namespace RDSandboxCUI
 {
-    public class HttpRequestObjectReceive
+    public class HttpRequestObject
     {
         internal static Dictionary<string, RequestType> RequestDictionary = new Dictionary<string, RequestType>() {
             {"GET", RequestType.Get},
             {"PUT", RequestType.Put},
             {"POST", RequestType.Post},
             {"HEAD", RequestType.Head},
-            {"OPTIONS", RequestType.Options}
+            {"OPTIONS", RequestType.Options},
+            {"DELETE", RequestType.Delete}
         };
 
         public RequestType RqType { get; private set; }
         public string Path { get; private set; }
         public string HttpVersion { get; private set; }
-
         public Dictionary<string, string> Header { get; private set; }
-
         public string Ingredients { get; private set; }
 
-        public HttpRequestObjectReceive(string request) {
+        public HttpRequestObject(string request) {
             RqType = RequestType.Err;
             Path = @"/";
             HttpVersion = "1.1";
@@ -36,17 +35,17 @@ namespace RDSandboxCUI
         }
 
         private void Parse(string request) {
-            var RquestPerLine = request.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
+            var RequestPerLine = request.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
 
             bool isHeader = false;
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < RquestPerLine.Length; i++) {
+            for (int i = 0; i < RequestPerLine.Length; i++) {
                 if (i == 0) {
                     // GET / HTTP/1.1
-                    // to
+                    //     to
                     // [GET], [/], [HTTP/1.1]
-                    var firstline = RquestPerLine[i].Split(' ');
+                    var firstline = RequestPerLine[i].Split(' ');
 
                     if (firstline.Length != 3) // Bad Request
                         return;
@@ -61,20 +60,20 @@ namespace RDSandboxCUI
                     HttpVersion = firstline[2].Replace("HTTP/", "");
                     isHeader = true;
                 } else if (isHeader) {
-                    if (!RquestPerLine[i].Contains(':')) {
-                        sb.Append(RquestPerLine[i]);
+                    if (RequestPerLine[i] == @"\r\n") {
+                        // sb.Append(RequestPerLine[i]);
                         isHeader = false;
                     } else {
                         Regex headerRegex = new Regex(@"(?<key>[\w-]*?):\s(?<value>.*?)$");
-                        var headerMatches= headerRegex.Match(RquestPerLine[i]);
+                        var headerMatches = headerRegex.Match(RequestPerLine[i]);
                         Header.Add(headerMatches.Groups["key"].Value, headerMatches.Groups["value"].Value);
                     }
                 } else {
-                    sb.Append(RquestPerLine[i]);
+                    sb.AppendLine(RequestPerLine[i]);
                 }
             }
 
-
+            Ingredients = sb.ToString();
         }
 
 

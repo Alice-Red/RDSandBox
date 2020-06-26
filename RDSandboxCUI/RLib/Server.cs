@@ -141,15 +141,25 @@ namespace RUtil.Tcp
             if (ConnectingList.ContainsKey(ip)) {
                 Send(ConnectingList[ip], message);
             }
+        } 
+        
+        public void Send(string ip, byte[] message) {
+            if (ConnectingList.ContainsKey(ip)) {
+                Send(ConnectingList[ip], message);
+            }
         }
 
         private static void Send(Socket target, string message) {
-            byte[] sendBytes = Encoding.UTF8.GetBytes(message + '\n');
+            byte[] sendBytes = Encoding.UTF8.GetBytes(message);
             target?.Send(sendBytes);
         }
 
+        private static void Send(Socket target, byte[] message) {
+            target?.Send(message);
+        }
+        
         public void Send(Func<Socket, int, bool> target, string message) {
-            byte[] sendBytes = Encoding.UTF8.GetBytes(message + '\n');
+            byte[] sendBytes = Encoding.UTF8.GetBytes(message);
             for (int i = 0; i < ConnectingList.Count(); i++) {
                 if (target(ConnectingList.ElementAt(i).Value, i))
                     ConnectingList.ElementAt(i).Value.Send(sendBytes);
