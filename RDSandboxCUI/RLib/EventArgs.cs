@@ -17,11 +17,11 @@ namespace RUtil.Tcp
         }
     }
 
-    public class ConnetionSuccessfullArgs : EventArgs
+    public class ConnectionSuccessfullArgs : EventArgs
     {
         public string IpAddress { get; }
 
-        public ConnetionSuccessfullArgs(string ipAddress) {
+        public ConnectionSuccessfullArgs(string ipAddress) {
             IpAddress = ipAddress;
         }
     }

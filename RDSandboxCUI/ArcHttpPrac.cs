@@ -27,7 +27,7 @@ namespace RDSandboxCUI
             sender.SendAll("Connection: close");
             sender.SendAll("");
             sender.SendAll("Copyright (C) Redkun. 2020");
-            sender.Disconnect((s, i) => s.RemoteEndPoint.ToString() == e.IpAddress);
+            sender.Disconnect(e.IpAddress);
         }
         
     }

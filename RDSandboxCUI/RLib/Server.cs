@@ -20,7 +20,7 @@ namespace RUtil.Tcp
 
         public event MessageReceivedHandler MessageReceived;
 
-        public delegate void ConnectionSuccessfullHandler(Server sender, ConnetionSuccessfullArgs e);
+        public delegate void ConnectionSuccessfullHandler(Server sender, ConnectionSuccessfullArgs e);
 
         public event ConnectionSuccessfullHandler ConnectionSuccessfull;
 
@@ -93,7 +93,7 @@ namespace RUtil.Tcp
                 server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 // server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger , true);
                 server.BeginAccept(new AsyncCallback(AcceptCallback), server);
-                ConnectionSuccessfull?.Invoke(this, new ConnetionSuccessfullArgs(client.RemoteEndPoint.ToString()));
+                ConnectionSuccessfull?.Invoke(this, new ConnectionSuccessfullArgs(client.RemoteEndPoint.ToString()));
                 ConnectingList.Add(client.RemoteEndPoint.ToString(), client);
                 ConnectedCount++;
                 Console.WriteLine(client.LocalEndPoint);
@@ -143,6 +143,7 @@ namespace RUtil.Tcp
                     //Console.WriteLine(sendMsg);
                     // } 
                     //client.Send(Encoding.UTF8.GetBytes($"returned [{resMsg}]"));
+                    exit = true;
                 } catch (Exception e) {
                     Console.WriteLine(e);
                     exit = true;
@@ -152,7 +153,7 @@ namespace RUtil.Tcp
             DisConnected?.Invoke(this, new DisConnectedArgs(ipadd));
             //client.Shutdown(System.Net.Sockets.SocketShutdown.Both);
             //client.Close();
-            Disconnect();
+            Disconnect(ipadd);
             ConnectingList.Remove(ipadd);
             ConnectedCount -= 1;
         }
@@ -163,6 +164,12 @@ namespace RUtil.Tcp
         public void SendAll(string message) {
             foreach (var item in ConnectingList) {
                 Send(item.Value, message);
+            }
+        }
+
+        public void Send(string ip, string message) {
+            if (ConnectingList.ContainsKey(ip)) {
+                Send(ConnectingList[ip], message);
             }
         }
 
@@ -179,8 +186,12 @@ namespace RUtil.Tcp
             }
         }
 
-        public void DisConnect() {
-            
+        public void Disconnect(string ip) {
+            if (ConnectingList.ContainsKey(ip)) {
+                ConnectingList[ip].Disconnect(true);
+                // ConnectingList[ip].Shutdown(SocketShutdown.Both);
+                ConnectingList[ip].Close();
+            }
         }
 
         public void Disconnect(Func<Socket, int, bool> target) {

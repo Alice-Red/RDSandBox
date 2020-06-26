@@ -40,6 +40,7 @@
     <ItemGroup>
         <Compile Include="ArcHttpPrac.cs" />
         <Compile Include="HttpPrac.cs" />
+        <Compile Include="HttpRequestObject.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="RLib\Client.cs" />
