@@ -8,9 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace RDSandboxCUI
 {
-    public struct HttpRequestObjectReceive
+    public class HttpRequestObjectReceive
     {
-        public static Dictionary<string, RequestType> RequestDictionary = new Dictionary<string, RequestType>() {
+        internal static Dictionary<string, RequestType> RequestDictionary = new Dictionary<string, RequestType>() {
             {"GET", RequestType.Get},
             {"PUT", RequestType.Put},
             {"POST", RequestType.Post},
