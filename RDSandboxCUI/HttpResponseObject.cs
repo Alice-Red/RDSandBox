@@ -23,6 +23,7 @@ namespace RDSandboxCUI
         public HttpResponseObject(string httpVersion) {
             HttpVersion = httpVersion;
             ResponseCode = 418;
+            Header = new Dictionary<string, string>();
         }
         
         public HttpResponseObject(string httpVersion, int code) {

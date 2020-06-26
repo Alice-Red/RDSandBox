@@ -8,7 +8,7 @@ namespace RDSandboxCUI
     public class ArcHttpPrac
     {
         private Server server;
-        private const string targetPath = "";
+        private const string targetPath = "target";
 
         public ArcHttpPrac() {
             server = new Server(12345);
@@ -20,33 +20,33 @@ namespace RDSandboxCUI
             Console.WriteLine(e.IpAddress);
             Console.WriteLine(e.Message);
             HttpRequestObject req = new HttpRequestObject(e.Message);
-
-            HttpResponseObject res = new HttpResponseObject(req.HttpVersion);
-
-            if (File.Exists(targetPath + req.Path)) {
+            
+            HttpResponseObject res = new HttpResponseObject("1.1");
+            
+            string localPath = targetPath + req.Path;
+            if (File.Exists(localPath)) {
                 res.ResponseCode = 200;
-                
-                
-                
-                
+            
+                var ext = Path.GetExtension(localPath);
+                res.StoreHeader("Content-Type", Extension.ToContentType[ext.Trim('.')] + ";");
+                res.StoreHeader("Connection", "keep-alive");
+            
                 using (StreamReader sr = new StreamReader(targetPath + req.Path)) {
                     res.Ingredients = sr.ReadToEnd();
                 }
+            } else {
+                res.ResponseCode = 404;
             }
 
 
-            sender.Send(e.IpAddress, "HTTP/1.1 200 OK");
-            sender.Send(e.IpAddress, "Content-Type: text/plain; charset=UTF-8");
-            sender.Send(e.IpAddress, "Connection: close");
-            sender.Send(e.IpAddress, "");
-            sender.Send(e.IpAddress, "Copyright (C) Redkun. 2020");
-            sender.Send(e.IpAddress, $"now is {DateTime.Now}");
-            
-            sender.Disconnect(e.IpAddress);
+            // sender.Send(e.IpAddress, "HTTP/1.1 200 OK\r\n");
+            // sender.Send(e.IpAddress, "Content-Type: text/plain; charset=UTF-8\r\n");
+            // sender.Send(e.IpAddress, "Connection: close\r\n");
+            // sender.Send(e.IpAddress, "\r\n");
+            // sender.Send(e.IpAddress, "Copyright (C) Redkun. 2020\r\n");
+            // sender.Send(e.IpAddress, $"now is {DateTime.Now}\r\n");
+            //
+            // sender.Disconnect(e.IpAddress);
         }
-
-        
-        
-        
     }
 }

@@ -18,7 +18,7 @@ namespace HttpTest
         [Test]
         public void Test1() {
             HttpRequestObject ex1 = new HttpRequestObject(
-                @"GET / HTTP/1.1 \r\n" +
+                "GET / HTTP/1.1 \r\n" +
                 "Host: 127.0.0.1:12345 \r\n" +
                 "Connection: keep-alive \r\n" +
                 "Cache-Control: max-age=0 \r\n" +
@@ -30,7 +30,7 @@ namespace HttpTest
                 "Sec-Fetch-User: ?1 \r\n" +
                 "Sec-Fetch-Dest: document \r\n" +
                 "Accept-Encoding: gzip, deflate, br \r\n" +
-                "Accept-Language: ja,en-US;q=0.9,en;q=0.8"
+                "Accept-Language: ja,en-US;q=0.9,en;q=0.8\r\n"
             );
             Assert.Equals(ex1.RqType, RequestType.Get);
             Assert.Equals(ex1.Path, "/");
