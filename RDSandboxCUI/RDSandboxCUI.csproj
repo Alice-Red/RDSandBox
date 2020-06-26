@@ -40,10 +40,11 @@
     <ItemGroup>
         <Compile Include="ArcHttpPrac.cs" />
         <Compile Include="HttpPrac.cs" />
-        <Compile Include="HttpRequestObject.cs" />
+        <Compile Include="HttpRequestObjectReceive.cs" />
         <Compile Include="NextServer.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="RequestType.cs" />
         <Compile Include="RLib\Client.cs" />
         <Compile Include="RLib\EventArgs.cs" />
         <Compile Include="RLib\Server.cs" />

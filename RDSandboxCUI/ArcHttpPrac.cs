@@ -21,7 +21,8 @@ namespace RDSandboxCUI
         {
             Console.WriteLine(e.IpAddress);
             Console.WriteLine(e.Message);
-            
+            HttpRequestObjectReceive req = new HttpRequestObjectReceive(e.Message);
+            Console.WriteLine(req.RqType);
             sender.Send(e.IpAddress, "HTTP/1.1 200 OK");
             sender.Send(e.IpAddress, "Content-Type: text/plain; charset=UTF-8");
             sender.Send(e.IpAddress, "Connection: close");

@@ -48,11 +48,11 @@ namespace RUtil.Tcp
             }
         }
 
+        private bool ForcedTermination = false;
+
         private Dictionary<string, Socket> ConnectingList = new Dictionary<string, Socket>();
 
         // private int ID = 0;
-
-        private bool forcedTermination = false;
 
         public Server() { connectedCount = 0; }
 
@@ -77,12 +77,14 @@ namespace RUtil.Tcp
 
 
             // IPAddress[] adrList = Dns.GetHostAddresses();
-            // ServerAwaked?.Invoke(this, new ServerAwakedArgs(new string[]{ipaddress}, Port));
-            // ServerAwaked?.Invoke(this, new ServerAwakedArgs(adrList.Select(s => s.ToString()).ToArray(), Port));
+            ServerAwaked?.Invoke(this, new ServerAwakedArgs(new string[]{server.LocalEndPoint.ToString()}, Port));
             server.BeginAccept(new AsyncCallback(AcceptCallback), server);
         }
 
         private void AcceptCallback(IAsyncResult ar) {
+            if (ForcedTermination)
+                return;
+            
             var server = (Socket) ar.AsyncState;
             Socket client;
             // int Id = ID;
@@ -177,10 +179,9 @@ namespace RUtil.Tcp
 
 
         public void ShutDown() {
-            forcedTermination = true;
+            ForcedTermination = true;
             foreach (var item in ConnectingList) {
-                item.Value.Shutdown(SocketShutdown.Both);
-                item.Value.Close();
+                Disconnect(item.Key);
             }
         }
     }

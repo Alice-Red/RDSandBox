@@ -7,3 +7,5 @@
 /Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.csproj.CopyComplete
 /Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.dll
 /Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.pdb
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/bin/Debug/RDSandboxCUI.exe
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/bin/Debug/RDSandboxCUI.pdb
