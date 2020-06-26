@@ -8,7 +8,7 @@ namespace RDSandboxCUI
     {
         public static void Main(string[] args) {
             ArcHttpPrac ah = new ArcHttpPrac();
-
+            // NextServer ns = new NextServer();
             // HttpPrac hp = new HttpPrac();
 
             Console.ReadKey(true);

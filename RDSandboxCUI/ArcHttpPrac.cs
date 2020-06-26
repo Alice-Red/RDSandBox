@@ -22,11 +22,12 @@ namespace RDSandboxCUI
             Console.WriteLine(e.IpAddress);
             Console.WriteLine(e.Message);
             
-            sender.SendAll("HTTP/1.1 200 OK");
-            sender.SendAll("Content-Type: text/plain; charset=UTF-8");
-            sender.SendAll("Connection: close");
-            sender.SendAll("");
-            sender.SendAll("Copyright (C) Redkun. 2020");
+            sender.Send(e.IpAddress, "HTTP/1.1 200 OK");
+            sender.Send(e.IpAddress, "Content-Type: text/plain; charset=UTF-8");
+            sender.Send(e.IpAddress, "Connection: close");
+            sender.Send(e.IpAddress, "");
+            sender.Send(e.IpAddress, "Copyright (C) Redkun. 2020");
+            sender.Send(e.IpAddress, $"now is {DateTime.Now}");
             sender.Disconnect(e.IpAddress);
         }
         
