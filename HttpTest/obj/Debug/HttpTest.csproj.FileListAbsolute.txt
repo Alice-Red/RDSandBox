@@ -1,0 +1,9 @@
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/bin/Debug/HttpTest.dll
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/bin/Debug/HttpTest.pdb
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/bin/Debug/nunit.framework.dll
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/bin/Debug/nunit.framework.xml
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.csprojAssemblyReference.cache
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.csproj.CoreCompileInputs.cache
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.csproj.CopyComplete
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.dll
+/Users/pc1013/RiderProjects/RDSandboxCUI/HttpTest/obj/Debug/HttpTest.pdb

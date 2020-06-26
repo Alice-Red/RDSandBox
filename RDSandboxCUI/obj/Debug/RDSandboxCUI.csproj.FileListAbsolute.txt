@@ -1,0 +1,6 @@
+/Users/pc1013/RiderProjects/RDSandboxCUI/RDSandboxCUI/bin/Debug/RDSandboxCUI.exe
+/Users/pc1013/RiderProjects/RDSandboxCUI/RDSandboxCUI/bin/Debug/RDSandboxCUI.pdb
+/Users/pc1013/RiderProjects/RDSandboxCUI/RDSandboxCUI/obj/Debug/RDSandboxCUI.csprojAssemblyReference.cache
+/Users/pc1013/RiderProjects/RDSandboxCUI/RDSandboxCUI/obj/Debug/RDSandboxCUI.csproj.CoreCompileInputs.cache
+/Users/pc1013/RiderProjects/RDSandboxCUI/RDSandboxCUI/obj/Debug/RDSandboxCUI.exe
+/Users/pc1013/RiderProjects/RDSandboxCUI/RDSandboxCUI/obj/Debug/RDSandboxCUI.pdb
