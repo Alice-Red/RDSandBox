@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace RDSandboxCUI
 {
@@ -11,8 +13,8 @@ namespace RDSandboxCUI
         public int ResponseCode { get; set; }
         public Dictionary<string, string> Header { get; private set; }
 
-        private string ingredients;
-        public string Ingredients {
+        private byte[] ingredients;
+        public byte[] Ingredients {
             get => ingredients;
             set {
                 ingredients = value;
@@ -38,6 +40,22 @@ namespace RDSandboxCUI
             } else {
                 Header[key] = value;
             }
+        }
+
+        public byte[] ToByteArray() {
+            var head = Encoding.UTF8.GetBytes(HeaderToString());
+            return head.Concat(Ingredients).ToArray();
+        }
+
+        private string HeaderToString() {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"HTTP/{HttpVersion} {ResponseCode} {HttpResponseCode.ResponseCode[ResponseCode]}");
+            foreach (var item in Header) {
+                sb.AppendLine($"{item.Key}: {item.Value}");
+            }
+
+            sb.AppendLine();
+            return sb.ToString();
         }
     }
 }

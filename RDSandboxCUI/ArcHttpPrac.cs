@@ -31,12 +31,16 @@ namespace RDSandboxCUI
                 res.StoreHeader("Content-Type", Extension.ToContentType[ext.Trim('.')] + ";");
                 res.StoreHeader("Connection", "keep-alive");
             
-                using (StreamReader sr = new StreamReader(targetPath + req.Path)) {
-                    res.Ingredients = sr.ReadToEnd();
+                using (FileStream fs = new FileStream(targetPath + req.Path, FileMode.Open,FileAccess.Read)) {
+                    byte[] bs = new byte[fs.Length];
+                    fs.Read(bs, 0, bs.Length);
+                    res.Ingredients = bs;
                 }
             } else {
                 res.ResponseCode = 404;
             }
+            
+            sender.Send(e.IpAddress,res.ToByteArray());
 
 
             // sender.Send(e.IpAddress, "HTTP/1.1 200 OK\r\n");
